@@ -1,0 +1,62 @@
+name: Unitegallery
+version: 1.0.0
+description: This plugin adds twig function to create media galleries using Unitegallery js library
+icon: th-large
+author:
+  name: Anton Filimonov
+  email: anton.filimonov@gmail.com
+homepage: https://github.com/variar/grav-plugin-unitegallery
+bugs: https://github.com/variar/grav-plugin-unitegallery/issues
+license: MIT
+keywords: gallery
+
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: Plugin status
+      highlight: 1
+      default: 0
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
+
+    gallery_theme:
+      type: select
+      label: Gallery theme
+      default: default
+      options:
+        default: Default
+        tiles: Tiles
+        tilesgrid: TilesGrid
+        carousel: Carousel
+        compact: Compact
+        grid: Grid
+        slider: Slider
+
+    gallery_div_id:
+      type: text
+      label: Id for gallery div
+      default: 'unite-gallery'
+      validate:
+        type: bool
+        min: 1
+
+    thumb_width:
+      type: number
+      label: Thumbnail width
+      default: 600
+      validate:
+        type: number
+        min: 100
+
+    thumb_height:
+      type: integer
+      label: Thumbnail height
+      default: 600
+      validate:
+        type: number
+        min: 100
