@@ -1,3 +1,11 @@
+# v1.0.1
+## 2017-03-26
+
+1. [](#bugfix)
+    * Fix validation of gallery div id field
+    [https://github.com/variar/grav-plugin-unitegallery/issues/2](https://github.com/variar/grav-plugin-unitegallery/issues/2)
+
+
 # v1.0.0
 ## 2017-03-19
 

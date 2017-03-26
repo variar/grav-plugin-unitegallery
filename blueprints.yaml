@@ -1,5 +1,5 @@
 name: Unitegallery
-version: 1.0.0
+version: 1.0.1
 description: This plugin adds twig function to create media galleries using Unitegallery js library
 icon: th-large
 author:
@@ -44,7 +44,7 @@ form:
       validate:
         type: text
         pattern: ^\S+$
-        message: Valid HTML5 element Id expected (no whitespace charachers allowed)
+        message: Valid HTML5 element Id expected (no whitespace allowed)
 
     thumb_width:
       type: number
