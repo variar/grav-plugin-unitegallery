@@ -42,8 +42,9 @@ form:
       label: Id for gallery div
       default: 'unite-gallery'
       validate:
-        type: bool
-        min: 1
+        type: text
+        pattern: ^\S+$
+        message: Valid HTML5 element Id expected (no whitespace charachers allowed)
 
     thumb_width:
       type: number
