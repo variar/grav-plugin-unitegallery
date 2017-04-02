@@ -37,6 +37,8 @@ This functions goes through each image in passed collection, generates thumbnail
 collects images metadata and outputs special div as required by [Unitegallery](http://unitegallery.net)
 javascript library. Also all css and js files needed for selected theme are added to page assets.
 
+>> NOTE: When page with the gallery is loaded first time thumbnails for each new image are generated. This can be quite time consuming process. Consider loading page manually when new images are added, so that users of your site will not encounter long page load time.
+
 To create the gallery you should call `unite_gallery` from twig template for desired page.
 For example add template `gallery.html.twig` inside `<your_theme>/templates/modular` directory with simple content:
 ```
@@ -61,14 +63,14 @@ user
 	 |--image02.jpg.meta.yaml
 ```
 
-Content of `gallery.md` can be like this (it just disables twig caching for this subpage):
+Content of `gallery.md` can be like this:
 ```
 ---
-never_cache_twig: true
+title: My fancy gallery
 ---
 ```
 
-And `modular.md` just includes child pages:
+And `modular.md` simply includes child pages:
 ```
 ---
 title: My Gallery Page
@@ -104,12 +106,35 @@ Grav images [metadata files](https://learn.getgrav.org/content/media#metafiles) 
 * meta.alt_text is used for alt attribute
 * meta.description is used for data-description attribute
 
->> NOTE: In order for this plugin to work never_cache_twig should be set to true for page where `unite_gallery` function is used (hope to relax this requirement in future)
+# Issues with page caching
+This plugin uses twig function to add assets (js and css) to the page.
+This doesn't work very well with Grav caching system.
+There are two workarounds:
+ 1. Disable twig caching for the gallery page.
+    Adding `never_cache_twig: true` to `gallery.md` from example above should do the trick.
+ 2. Enabling `assets_in_meta` parameter for this plugin (either per page) or globally.
+    This will save assets calculated during first twig processing and add them
+    each time page is processed. This parameter is enabled by default.
+    After switching it on cache for all gallery pages should be updated (either by cleaning all cache or by doing some changes to affected pages).
+    For best perfomance consider disabling this mode globally and switching it on only for gallery pages.
+    Using the example above `modular.md` should look like this:
+    ```
+    ---
+    title: My Gallery Page
+
+    content:
+      items: @self.modular
+
+    unitegallery:
+      assets_in_meta: true
+    ---
+    ```
 
 # Config Defaults
 
 ```
 enabled: true
+assets_in_meta: true
 gallery_theme: default
 gallery_div_id: unite-gallery
 thumb_width: 600

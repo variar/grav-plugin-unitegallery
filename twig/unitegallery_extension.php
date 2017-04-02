@@ -82,11 +82,22 @@ class UniteGalleryTwigExtension extends \Twig_Extension
       $assets_path = 'plugin://unitegallery/vendor/unitegallery/';
       $theme_assets_prefix = $assets_path . 'themes/' . $gallery_theme . '/ug-theme-'. $gallery_theme;
 
-      $this->grav['assets']
-                    ->addJs($assets_path . 'js/unitegallery.min.js')
-                    ->addCss($assets_path . 'css/unite-gallery.css')
-                    ->addJs($theme_assets_prefix . '.js')
-                    ->addCss($theme_assets_prefix . '.css');
+      $jsAssets = [$assets_path . 'js/unitegallery.min.js', $theme_assets_prefix . '.js'];
+      $cssAssets = [$assets_path . 'css/unite-gallery.css', $theme_assets_prefix . '.css'];
+
+      // for first time page processing
+      foreach ($jsAssets as $js) {
+          $this->grav['assets']->addJs($js);
+      }
+      foreach ($cssAssets as $css) {
+          $this->grav['assets']->addCss($css);
+      }
+
+      // saving assets in page meta to use in pageInitialzied event hook
+      // for cached pages
+      $page = $this->grav['page'];
+      $page->addContentMeta('unitegallery_assets',
+                            ['js' => $jsAssets, 'css' => $cssAssets]);
 
       return $this;
     }

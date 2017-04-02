@@ -1,5 +1,12 @@
+# v1.1.0
+## 2017-04-02
+
+1. [](#new)
+    * Changed assets loading scheme to allow caching of pages with galleries
+
 # v1.0.1
 ## 2017-03-26
+
 
 1. [](#bugfix)
     * Fix validation of gallery div id field

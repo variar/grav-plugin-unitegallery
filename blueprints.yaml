@@ -1,5 +1,5 @@
 name: Unitegallery
-version: 1.0.1
+version: 1.1.0
 description: This plugin adds twig function to create media galleries using Unitegallery js library
 icon: th-large
 author:
@@ -8,7 +8,7 @@ author:
 homepage: https://github.com/variar/grav-plugin-unitegallery
 bugs: https://github.com/variar/grav-plugin-unitegallery/issues
 license: MIT
-keywords: gallery
+keywords: gallery, images, unitegallery
 
 form:
   validation: strict
@@ -24,9 +24,22 @@ form:
       validate:
         type: bool
 
+    assets_in_meta:
+      type: toggle
+      label: Store assets in page metadata
+      help: Allows to pass assets from twig to this plugin in case of caching. Can be enabled per-page. Cache should be rebuilt after enabling this.
+      highlight: 1
+      default: 1
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
+
     gallery_theme:
       type: select
       label: Gallery theme
+      help: Select theme for the gallery that will be used by default. Can be customized from twig.
       default: default
       options:
         default: Default
@@ -40,11 +53,12 @@ form:
     gallery_div_id:
       type: text
       label: Id for gallery div
+      help: Use this to set desired div id for the main gallery div
       default: 'unite-gallery'
       validate:
         type: text
         pattern: ^\S+$
-        message: Valid HTML5 element Id expected (no whitespace allowed)
+        message: Valid HTML5 element Id expected (no whitespace charachers allowed)
 
     thumb_width:
       type: number
