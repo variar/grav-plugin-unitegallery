@@ -68,6 +68,9 @@ class UniteGalleryTwigExtension extends \Twig_Extension
       $this->addAssets($gallery_theme);
 
       $gallery_div_id = $custom_gallery_id;
+      if (is_null($gallery_div_id) && property_exists($gallery_options, 'grav_gallery_div_id')) {
+        $gallery_div_id = $gallery_options->grav_gallery_div_id;
+      }
       is_null($gallery_div_id) && $gallery_div_id = $this->gallery_div_id;
       is_null($gallery_div_id) && $gallery_div_id = "unite-gallery";
 

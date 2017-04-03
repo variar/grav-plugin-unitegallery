@@ -140,6 +140,12 @@ with custom ids:
 {{ unite_gallery(page.media.images, '{}', 'gallery2') }}
 ```
 
+Also custom id can be set in json options:
+```
+// with custom div id
+{{ unite_gallery(page.media.images, '{"gallery_theme":"tiles", "grav_gallery_div_id":"gallery1"}') }}
+```
+
 This allows to create galleries from several subfolders of modular page:
 
 ```

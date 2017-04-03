@@ -1,3 +1,9 @@
+# v1.1.2
+## 2017-04-03
+
+1. [](#new)
+    * Allow to pass custom gallery id in json options
+
 # v1.1.1
 ## 2017-04-03
 
