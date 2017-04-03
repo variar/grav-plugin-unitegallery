@@ -1,3 +1,9 @@
+# v1.1.1
+## 2017-04-03
+
+1. [](#new)
+    * Allow to pass custom gallery id to have several galleries per page.
+
 # v1.1.0
 ## 2017-04-02
 

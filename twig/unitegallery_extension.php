@@ -47,9 +47,10 @@ class UniteGalleryTwigExtension extends \Twig_Extension
     /**
      * @param ImageMedium[] $images
      * @param string $options
+     * @param string $custom_gallery_id
      * @return string
      */
-    public function uniteGallery(array $images, $options = '{}')
+    public function uniteGallery(array $images, $options = '{}', $custom_gallery_id = null)
     {
       $gallery_theme = null;
 
@@ -66,7 +67,8 @@ class UniteGalleryTwigExtension extends \Twig_Extension
 
       $this->addAssets($gallery_theme);
 
-      $gallery_div_id = $this->gallery_div_id;
+      $gallery_div_id = $custom_gallery_id;
+      is_null($gallery_div_id) && $gallery_div_id = $this->gallery_div_id;
       is_null($gallery_div_id) && $gallery_div_id = "unite-gallery";
 
       return $this->buildImagesDiv($images, $gallery_div_id)
@@ -85,20 +87,24 @@ class UniteGalleryTwigExtension extends \Twig_Extension
       $jsAssets = [$assets_path . 'js/unitegallery.min.js', $theme_assets_prefix . '.js'];
       $cssAssets = [$assets_path . 'css/unite-gallery.css', $theme_assets_prefix . '.css'];
 
-      // for first time page processing
-      foreach ($jsAssets as $js) {
-          $this->grav['assets']->addJs($js);
-      }
-      foreach ($cssAssets as $css) {
-          $this->grav['assets']->addCss($css);
-      }
-
       // saving assets in page meta to use in pageInitialzied event hook
       // for cached pages
       $page = $this->grav['page'];
-      $page->addContentMeta('unitegallery_assets',
-                            ['js' => $jsAssets, 'css' => $cssAssets]);
+      $pageMeta = $page->getContentMeta('unitegallery_assets');
+      if (empty($pageMeta)) {
+        $pageMeta = ['js'=> [], 'css' => []];
+      }
 
+      foreach ($jsAssets as $js) {
+        $this->grav['assets']->addJs($js);
+        array_push($pageMeta['js'], $js);
+      }
+      foreach ($cssAssets as $css) {
+        $this->grav['assets']->addCss($css);
+        array_push($pageMeta['css'], $css);
+      }
+
+      $page->addContentMeta('unitegallery_assets', $pageMeta);
       return $this;
     }
 

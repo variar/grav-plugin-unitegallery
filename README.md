@@ -55,12 +55,12 @@ user
    |--page2
    |--page_with_gallery
       |--modular.md
-      |--pictures
+      |--_pictures
          |--gallery.md
-	 |--image01.jpg
-	 |--image01.jpg.meta.yaml
-	 |--image02.jpg
-	 |--image02.jpg.meta.yaml
+         |--image01.jpg
+         |--image01.jpg.meta.yaml
+         |--image02.jpg
+         |--image02.jpg.meta.yaml
 ```
 
 Content of `gallery.md` can be like this:
@@ -129,6 +129,55 @@ There are two workarounds:
       assets_in_meta: true
     ---
     ```
+
+# Several galleries in one modular page
+If several galleries are going to be used on the same page then optional third
+argument should be passed to `unite_gallery` function to create `div` elements
+with custom ids:
+```
+// with custom div id
+{{ unite_gallery(page.media.images, '{"gallery_theme":"tiles", "tiles_type":"justified"}', 'gallery1') }}
+{{ unite_gallery(page.media.images, '{}', 'gallery2') }}
+```
+
+This allows to create galleries from several subfolders of modular page:
+
+```
+user
+|--pages
+   |--page1
+   |--page2
+   |--page_with_gallery
+      |--modular.md
+      |--_photo1
+      |  |--gallery.md
+      |  |--image01.jpg
+      |  |--image01.jpg.meta.yaml
+      |  |--image02.jpg
+      |  |--image02.jpg.meta.yaml
+      |--_photo2
+         |--gallery.md
+         |--image01.jpg
+         |--image01.jpg.meta.yaml
+         |--image02.jpg
+         |--image02.jpg.meta.yaml
+```
+
+To pass gallery ids from page header `gallery.html.twig` should be modified:
+```
+<div class="modular-row gallery-container {{ page.header.class }}">
+	{{ unite_gallery(page.media.images, {"gallery_theme":"tiles"}, page.header.unitegallery.gallery_id) }}
+</div>
+```
+
+Then in `gallery.md` files for individual galleries set gallery_id in page header:
+```
+---
+title: My fancy gallery
+unitegallery:
+  gallery_id: gallery1
+---
+```
 
 # Config Defaults
 
