@@ -142,7 +142,7 @@ with custom ids:
 
 Also custom id can be set in json options:
 ```
-// with custom div id
+// with custom div id in json options
 {{ unite_gallery(page.media.images, '{"gallery_theme":"tiles", "grav_gallery_div_id":"gallery1"}') }}
 ```
 
@@ -183,6 +183,23 @@ title: My fancy gallery
 unitegallery:
   gallery_id: gallery1
 ---
+```
+
+# Gallery in non-modular page
+When using gallery in non-modular page gallery theme **must** be set in page header:
+```
+---
+title: My fancy gallery
+unitegallery:
+  gallery_theme: tiles
+---
+```
+
+Call to unite_gallery in page template **must** either take theme from page header or not set it at all:
+```
+<div class="gallery-container {{ page.header.class }}">
+	{{ unite_gallery(page.media.images, {"gallery_theme":page.header.unitegallery.gallery_theme}, page.header.unitegallery.gallery_id) }}
+</div>
 ```
 
 # Config Defaults

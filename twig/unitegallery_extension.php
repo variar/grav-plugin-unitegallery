@@ -54,12 +54,19 @@ class UniteGalleryTwigExtension extends \Twig_Extension
     {
       $gallery_theme = null;
 
+      $page_gallery_theme = null;
+      $page_header = $this->grav["page"]->header();
+      if(property_exists($page_header, "unitegallery.merged")) {
+        $page_gallery_theme = $page_header->{"unitegallery.merged"}->get("gallery_theme");
+      }
+
       $gallery_options = json_decode($options);
       if (property_exists($gallery_options, 'gallery_theme')) {
         $gallery_theme = $gallery_options->gallery_theme;
       }
       else {
-        $gallery_theme = $this->gallery_theme;
+        $gallery_theme = $page_gallery_theme;
+        is_null($gallery_theme) && $gallery_theme = $this->gallery_theme;
         is_null($gallery_theme) && $gallery_theme = 'default';
 
         $gallery_options->gallery_theme = $gallery_theme;
@@ -108,6 +115,7 @@ class UniteGalleryTwigExtension extends \Twig_Extension
       }
 
       $page->addContentMeta('unitegallery_assets', $pageMeta);
+
       return $this;
     }
 

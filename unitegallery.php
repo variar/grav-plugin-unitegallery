@@ -39,6 +39,7 @@ class UniteGalleryPlugin extends Plugin
       $page = $this->grav['page'];
 
       $config = $this->mergeConfig($page);
+
       if (!$config->get('assets_in_meta', true))
         return;
 
@@ -60,6 +61,17 @@ class UniteGalleryPlugin extends Plugin
       $page_meta = $page->getContentMeta('unitegallery_assets');
       if ($page_meta) {
           $meta = array_merge_recursive($meta, $page_meta);
+      }
+
+      if (empty($meta)) {
+        $gallery_theme = $config->get('gallery_theme', "default");
+        $assets_path = 'plugin://unitegallery/vendor/unitegallery/';
+        $theme_assets_prefix = $assets_path . 'themes/' . $gallery_theme . '/ug-theme-'. $gallery_theme;
+
+        $meta['js'] = [$assets_path . 'js/unitegallery.min.js', $theme_assets_prefix . '.js'];
+        $meta['css'] = [$assets_path . 'css/unite-gallery.css', $theme_assets_prefix . '.css'];
+
+        $page->addContentMeta('unitegallery_assets', $meta);
       }
 
       if (!empty($meta)) {

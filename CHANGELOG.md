@@ -1,3 +1,11 @@
+# v1.1.3
+## 2017-05-19
+
+1. [](#bugfix)
+    * Allow to use gallery in non-modular pages
+    [https://github.com/variar/grav-plugin-unitegallery/issues/8](https://github.com/variar/grav-plugin-unitegallery/issues/8)
+
+
 # v1.1.2
 ## 2017-04-03
 
