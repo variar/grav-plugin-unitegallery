@@ -172,7 +172,7 @@ user
 To pass gallery ids from page header `gallery.html.twig` should be modified:
 ```
 <div class="modular-row gallery-container {{ page.header.class }}">
-	{{ unite_gallery(page.media.images, {"gallery_theme":"tiles"}, page.header.unitegallery.gallery_id) }}
+	{{ unite_gallery(page.media.images, '{"gallery_theme":"tiles"}', page.header.unitegallery.gallery_id) }}
 </div>
 ```
 
@@ -198,7 +198,7 @@ unitegallery:
 Call to unite_gallery in page template **must** either take theme from page header or not set it at all:
 ```
 <div class="gallery-container {{ page.header.class }}">
-	{{ unite_gallery(page.media.images, {"gallery_theme":page.header.unitegallery.gallery_theme}, page.header.unitegallery.gallery_id) }}
+	{{ unite_gallery(page.media.images, '{"gallery_theme":"' ~ page.header.unitegallery.gallery_theme ~ '"}') }}
 </div>
 ```
 
