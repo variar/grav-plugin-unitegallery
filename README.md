@@ -4,6 +4,8 @@
 [Twig](http://github.com/twigphp/Twig) extension for creating images gallery using [Unitegallery](http://unitegallery.net)
 javascript library
 
+Demo site with default Grav installation and this plugin can be found in this [repository](https://github.com/variar/grav_example_unitegallery).
+
 # Installation
 
 Installing the Unitegallery plugin can be done in one of two ways. The GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.
@@ -199,6 +201,16 @@ Call to unite_gallery in page template **must** either take theme from page head
 ```
 <div class="gallery-container {{ page.header.class }}">
 	{{ unite_gallery(page.media.images, '{"gallery_theme":"' ~ page.header.unitegallery.gallery_theme ~ '"}') }}
+</div>
+```
+
+If there are issues with caching assest set ```assets_in_meta: true``` for this page.
+
+# Raw html output with gantry templates
+When using gantry gallery.html.twig should be modifed to output correct html (pay attention to `raw`):
+```
+<div class="gallery-container {{ page.header.class }}">
+	{{ unite_gallery(page.media.images)|raw }}
 </div>
 ```
 
