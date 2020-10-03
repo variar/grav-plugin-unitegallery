@@ -108,6 +108,30 @@ Grav images [metadata files](https://learn.getgrav.org/content/media#metafiles) 
 * meta.alt_text is used for alt attribute
 * meta.description is used for data-description attribute
 
+Note: the meta.alt_text is what is being displayed on the text panel being displayed if you click on a picture.
+
+# Using the various layouts of unitgallery
+
+If you visit [unitegallery](http://unitegallery.net/) you see that they have various layouts that you can use for your albums. Below are some examples.
+
+This generates a "traditional" album where you see one picture large and below the list of all pictures:
+
+```
+<div class="gallery-container {{ page.header.class }}">
+	{{ unite_gallery(page.media.images, '{"gallery_theme":"default","slider_scale_mode": "fit"}') }}
+</div>
+```
+
+This generates an album where all pictures are displayed as thumbnails and the metadata alt_text is displayed as text at the bottom of the thumbnail:
+
+```
+<div class="gallery-container {{ page.header.class }}">
+	{{ unite_gallery(page.media.images, '{"gallery_theme":"tiles","tile_enable_textpanel":true,"tile_textpanel_title_text_align": "center","tile_textpanel_always_on":true}') }}
+</div>
+```
+
+With the gallery_theme parameter you can use any of the layouts/options that you find on the unitegallery page.
+
 # Issues with page caching
 This plugin uses twig function to add assets (js and css) to the page.
 This doesn't work very well with Grav caching system.
