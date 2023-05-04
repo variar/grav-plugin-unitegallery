@@ -2,7 +2,9 @@
 
 `Unitegallery` is a [Grav](http://github.com/getgrav/grav) Plugin that provides
 [Twig](http://github.com/twigphp/Twig) extension for creating images gallery using [Unitegallery](http://unitegallery.net)
-javascript library
+javascript library.
+
+**Security notice:** [Unitegallery repository](https://github.com/vvvmax/unitegallery/) has been abandoned since 2017 and uses jQuery `v1.11.0` which is end of life.
 
 Demo site with default Grav installation and this plugin can be found in this [repository](https://github.com/variar/grav_example_unitegallery).
 
